@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Cancel2.wav-edbf60fed33774e068ab480a3b9fb707.sample"
+
+[deps]
+
+source_file="res://Sound/Cancel2.wav"
+dest_files=[ "res://.import/Cancel2.wav-edbf60fed33774e068ab480a3b9fb707.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

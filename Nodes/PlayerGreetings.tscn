@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://general_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Fonts/pixelmix/pixelmix.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/RunLabel.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.6, 0.898039, 0.313726, 1 )
+text = "test"
+script = ExtResource( 3 )

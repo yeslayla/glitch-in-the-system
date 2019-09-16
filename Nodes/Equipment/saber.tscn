@@ -1,0 +1,74 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Scripts/Equipment/saber.gd" type="Script" id=1]
+[ext_resource path="res://Art/player_saber.png" type="Texture" id=2]
+[ext_resource path="res://Art/player_saber9.png" type="Texture" id=3]
+[ext_resource path="res://Art/player_saber8.png" type="Texture" id=4]
+[ext_resource path="res://Art/player_saber7.png" type="Texture" id=5]
+[ext_resource path="res://Art/player_saber6.png" type="Texture" id=6]
+[ext_resource path="res://Art/player_saber5.png" type="Texture" id=7]
+[ext_resource path="res://Art/player_saber4.png" type="Texture" id=8]
+[ext_resource path="res://Art/player_saber3.png" type="Texture" id=9]
+[ext_resource path="res://Art/player_saber2.png" type="Texture" id=10]
+[ext_resource path="res://Art/player_saber1.png" type="Texture" id=11]
+[ext_resource path="res://Art/player_saber_attack1.png" type="Texture" id=12]
+[ext_resource path="res://Art/player_saber_attack2.png" type="Texture" id=13]
+[ext_resource path="res://Art/player_saber_attack3.png" type="Texture" id=14]
+[ext_resource path="res://Art/player_saber_attack4.png" type="Texture" id=15]
+[ext_resource path="res://Art/player_saber_attack5.png" type="Texture" id=16]
+[ext_resource path="res://Art/trail.png" type="Texture" id=17]
+[ext_resource path="res://Nodes/Equipment/Line2D.gd" type="Script" id=18]
+[ext_resource path="res://Art/light.png" type="Texture" id=19]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "Spawn",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "Attack",
+"speed": 30.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+[node name="Arms" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Attack"
+frame = 1
+
+[node name="Line2D" type="Line2D" parent="AnimatedSprite"]
+z_index = -10
+z_as_relative = false
+points = PoolVector2Array( 27.1471, 15.6522 )
+default_color = Color( 0.596078, 0.596078, 0.596078, 0.65098 )
+texture = ExtResource( 17 )
+texture_mode = 2
+script = ExtResource( 18 )
+targetPath = NodePath("..")
+trailLength = 8
+
+[node name="Light2D" type="Light2D" parent="AnimatedSprite"]
+texture = ExtResource( 19 )
+texture_scale = 1.5
+color = Color( 0.643137, 1, 0.956863, 1 )
+energy = 1.25
+shadow_enabled = true
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite/Area2D"]
+position = Vector2( 5, 0 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 2 )
