@@ -3,8 +3,12 @@ extends Node2D
 export var HP = 8
 export var color = "ffff00"
 
+var tileMap
 func _ready():
-	pass 
+	var tileMap = get_node("/root/World/TileMap")
+	var tilePos = tileMap.world_to_map(position)
+	if(tileMap.get_cell(tilePos.x, tilePos.y) != 0):
+		queue_free()
 	
 func take_damage(dmg):
 	playAudio("Bomb_Drop.wav")
