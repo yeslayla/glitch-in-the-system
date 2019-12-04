@@ -1,6 +1,6 @@
 name: Build & Push
 
-on: [push]
+on: [push, pull_request]
 
 
 jobs:
@@ -21,12 +21,13 @@ jobs:
       env:
         SOURCE_DIR: build
         AWS_REGION: us-east-1
-        DEST_DIR: glitch/builds
+        DEST_DIR: glitch/builds/${{ github.ref }}
         AWS_S3_BUCKET: sumu-games-pkg-us-east-1
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Butler Publish Linux
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
+      if: github['ref'] == 'refs/heads/develop'
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         VERSION: develop
@@ -36,6 +37,7 @@ jobs:
         PACKAGE: build/linux
     - name: Butler Publish Windows
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
+      if: github['ref'] == 'refs/heads/develop'
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         VERSION: develop
@@ -45,6 +47,7 @@ jobs:
         PACKAGE: build/windows
     - name: Butler Publish HTML5
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
+      if: github['ref'] == 'refs/heads/develop'
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         VERSION: develop
@@ -54,6 +57,7 @@ jobs:
         PACKAGE: build/html5/GITS
     - name: Butler Publish OSX
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
+      if: github['ref'] == 'refs/heads/develop'
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         VERSION: develop
