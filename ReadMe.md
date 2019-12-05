@@ -1,5 +1,6 @@
 # Glitch In The System
 ![GitHub repo size](https://img.shields.io/github/repo-size/josephbmanley/GlitchInTheSystem.svg)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fjosephbmanley%2FGlitchInTheSystem%2Fbadge%3Fref%3Ddevelop&style=flat)](https://actions-badge.atrox.dev/josephbmanley/GlitchInTheSystem/goto?ref=develop)
 
 [Play on Itch.io](https://joebmanley.itch.io/glitchinthesystem)
 
