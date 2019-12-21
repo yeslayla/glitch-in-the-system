@@ -15,9 +15,9 @@ jobs:
     - name: ''
       run: |
         pip install bumpversion
-        export regex=v([0-9]+.[0-9]+.[0-9]+)
+        export regex="([0-9]+.[0-9]+.[0-9]+)"
         echo ${{ github.ref }} > tag.txt
-        VERSION=`grep -Po '${regex}' tag.txt`
+        VERSION=`grep -Po "${regex}" tag.txt`
         bumpversion --new-version ${VERSION}
     - name: Build
       id: build
@@ -49,7 +49,10 @@ jobs:
     - name: ''
       run: |
         pip install bumpversion
-        bumpversion --new-version ${SEMVER_NEW_VERSION}
+        export regex="([0-9]+.[0-9]+.[0-9]+)"
+        echo ${{ github.ref }} > tag.txt
+        VERSION=`grep -Po "${regex}" tag.txt`
+        bumpversion --new-version ${VERSION}
     - name: Build
       id: build
       uses: josephbmanley/build-godot-action@refactor/build
