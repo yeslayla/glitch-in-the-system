@@ -1,67 +1,73 @@
-name: Build & Push
+name: Build & Publish
 
-on: [push, pull_request]
+on: release
 
 
 jobs:
   Build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [linux, windows, mac]
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Build Multi-Platform Project
-      uses: josephbmanley/build-godot-action@v1.2.1
-      env:
-        PROJECT: GITS
-        SUBDIRECTORY: GITS
-    - name: Ship to S3
-      uses: jakejarvis/s3-sync-action@master
+    - name: ''
+      run: |
+        pip install bumpversion
+        export regex=v([0-9]+.[0-9]+.[0-9]+)
+        echo ${{ github.ref }} > tag.txt
+        VERSION=`grep -Po '${regex}' tag.txt`
+        bumpversion --new-version ${VERSION}
+    - name: Build
+      id: build
+      uses: josephbmanley/build-godot-action@refactor/build
       with:
-        args: --follow-symlinks --delete
+        name: glitchinthesystem
+        preset: ${{ matrix.platform }}
+        subdirectory: gits
+    - name: GitHub Release Artifact
+      uses: josephbmanley/upload-to-release@feature/remoteName
+      with:
+        args: ${{ steps.build.outputs.artifact }} application/zip ${{ matrix.platform }}.zip
       env:
-        SOURCE_DIR: build
-        AWS_REGION: us-east-1
-        DEST_DIR: glitch/builds/${{ github.ref }}
-        AWS_S3_BUCKET: sumu-games-pkg-us-east-1
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    - name: Butler Publish Linux
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Butler Publish
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
-      if: github['ref'] == 'refs/heads/develop'
-      env:
-        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        VERSION: develop
-        ITCH_USER: joebmanley
-        ITCH_GAME: glitchinthesystem
-        CHANNEL: linux
-        PACKAGE: build/linux
-    - name: Butler Publish Windows
-      uses: josephbmanley/butler-publish-itchio-action@v1.0.0
-      if: github['ref'] == 'refs/heads/develop'
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         VERSION: develop
         ITCH_USER: joebmanley
         ITCH_GAME: glitchinthesystem
-        CHANNEL: windows
-        PACKAGE: build/windows
-    - name: Butler Publish HTML5
+        CHANNEL: ${{ matrix.platform }}
+        PACKAGE: ${{ steps.build.outputs.artifact }}
+  HTML:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ''
+      run: |
+        pip install bumpversion
+        bumpversion --new-version ${SEMVER_NEW_VERSION}
+    - name: Build
+      id: build
+      uses: josephbmanley/build-godot-action@refactor/build
+      with:
+        name: glitchinthesystem
+        preset: html5
+    - name: GitHub Release Artifact
+      uses: josephbmanley/upload-to-release@feature/remoteName
+      with:
+        args: ${{ steps.build.outputs.artifact }} application/zip html5.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Butler Publish
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
-      if: github['ref'] == 'refs/heads/develop'
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         VERSION: develop
         ITCH_USER: joebmanley
         ITCH_GAME: glitchinthesystem
         CHANNEL: html5
-        PACKAGE: build/html5/GITS
-    - name: Butler Publish OSX
-      uses: josephbmanley/butler-publish-itchio-action@v1.0.0
-      if: github['ref'] == 'refs/heads/develop'
-      env:
-        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        VERSION: develop
-        ITCH_USER: joebmanley
-        ITCH_GAME: glitchinthesystem
-        CHANNEL: osx
-        PACKAGE: build/mac
+        PACKAGE: ${{ steps.build.outputs.artifact }}
