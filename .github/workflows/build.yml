@@ -48,9 +48,8 @@ jobs:
       uses: actions/checkout@v1
     - uses: josephbmanley/auto-semver-action@master
       with:
-        args:
-          action: updateFiles
-          version: ${{ github.ref }}
+        action: updateFiles
+        version: ${{ github.ref }}
     - name: Build
       id: build
       uses: josephbmanley/build-godot-action@refactor/build
