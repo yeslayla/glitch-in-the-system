@@ -52,7 +52,7 @@ jobs:
         export regex="([0-9]+.[0-9]+.[0-9]+)"
         echo ${{ github.ref }} > tag.txt
         VERSION=`grep -Po "${regex}" tag.txt`
-        bumpversion --new-version ${VERSION}
+        ~/.local/bin/bumpversion --new-version ${VERSION}
     - name: Build
       id: build
       uses: josephbmanley/build-godot-action@refactor/build
