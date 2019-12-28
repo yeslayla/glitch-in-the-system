@@ -46,13 +46,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: ''
-      run: |
-        pip install bumpversion --user
-        export regex="([0-9]+.[0-9]+.[0-9]+)"
-        echo ${{ github.ref }} > tag.txt
-        VERSION=`grep -Po "${regex}" tag.txt`
-        ~/.local/bin/bumpversion --new-version ${VERSION}
+    - uses: josephbmanley/auto-semver-action@master
+      with:
+        args:
+          action: updateFiles
+          version: ${{ github.ref }}
     - name: Build
       id: build
       uses: josephbmanley/build-godot-action@refactor/build
