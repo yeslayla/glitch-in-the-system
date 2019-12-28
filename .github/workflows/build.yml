@@ -1,7 +1,9 @@
 name: Build & Publish
 
-on: release
-
+on:
+  release:
+    types:
+    - created
 
 jobs:
   Build:
