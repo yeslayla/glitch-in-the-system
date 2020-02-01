@@ -14,16 +14,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: ''
-      run: |
-        pip install bumpversion --user
-        export regex="([0-9]+.[0-9]+.[0-9]+)"
-        echo ${{ github.ref }} > tag.txt
-        VERSION=`grep -Po "${regex}" tag.txt`
-        bumpversion --new-version ${VERSION}
+    - name: Update Version
+      id: semver
+      uses: RightBrain-Networks/semver-action@1.0.0
+      with:
+        mode: get
     - name: Build
       id: build
-      uses: josephbmanley/build-godot-action@refactor/build
+      uses: josephbmanley/build-godot-action@v1.3.2
       with:
         name: glitchinthesystem
         preset: ${{ matrix.platform }}
@@ -42,34 +40,4 @@ jobs:
         ITCH_USER: joebmanley
         ITCH_GAME: glitchinthesystem
         CHANNEL: ${{ matrix.platform }}
-        PACKAGE: ${{ steps.build.outputs.artifact }}
-  HTML:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - uses: josephbmanley/auto-semver-action@master
-      with:
-        action: updateFiles
-        version: ${{ github.ref }}
-    - name: Build
-      id: build
-      uses: josephbmanley/build-godot-action@refactor/build
-      with:
-        name: glitchinthesystem
-        preset: html5
-    - name: GitHub Release Artifact
-      uses: josephbmanley/upload-to-release@feature/remoteName
-      with:
-        args: ${{ steps.build.outputs.artifact }} application/zip html5.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Butler Publish
-      uses: josephbmanley/butler-publish-itchio-action@v1.0.0
-      env:
-        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        VERSION: develop
-        ITCH_USER: joebmanley
-        ITCH_GAME: glitchinthesystem
-        CHANNEL: html5
         PACKAGE: ${{ steps.build.outputs.artifact }}
