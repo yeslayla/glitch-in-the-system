@@ -13,19 +13,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Run auto-semver
+    - name: Run Auto-Semver
       id: semver
-      run: |
-        export regex='^\\s*current_version\\s*=\\s*\\K[^\\s]+'
-        export RETURN_STATUS=`semver -n`
-        echo "Semver Return Status: ${RETURN_STATUS}"
-    
-        export SEMVER_NEW_VERSION=`grep -Po '${regex}' .bumpversion.cfg`
-        export VERSION=`semver_get_version -d`
-
-        echo ::set-output name=RETURN_STATUS::$RETURN_STATUS
-        echo ::set-output name=SEMVER_NEW_VERSION::$SEMVER_NEW_VERSION
-        echo ::set-output name=VERSION::$VERSION
+      uses: RightBrain-Networks/semver-action@1.0.0
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -33,8 +23,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v${{ steps.semver.outputs.SEMVER_NEW_VERSION }}
-        release_name: v${{ steps.semver.outputs.SEMVER_NEW_VERSION }}
+        tag_name: ${{ steps.semver.outputs.SEMVER_NEW_VERSION }}
+        release_name: ${{ steps.semver.outputs.SEMVER_NEW_VERSION }}
         body: |
           Glitch In The System v${{ steps.semver.outputs.SEMVER_NEW_VERSION }}
         draft: false

@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [linux, windows, mac]
+        platform: [linux, windows, osx]
     steps:
     - name: Checkout
       uses: actions/checkout@v1
@@ -36,7 +36,7 @@ jobs:
       uses: josephbmanley/butler-publish-itchio-action@v1.0.0
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        VERSION: develop
+        VERSION: ${{ steps.semver.outputs.VERSION }}
         ITCH_USER: joebmanley
         ITCH_GAME: glitchinthesystem
         CHANNEL: ${{ matrix.platform }}
