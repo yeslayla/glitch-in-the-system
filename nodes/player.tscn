@@ -1,0 +1,124 @@
+[gd_scene load_steps=19 format=3 uid="uid://de3exlu8jniam"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_5wuh1"]
+[ext_resource type="PackedScene" path="res://nodes/jump_platform.tscn" id="2_2rooy"]
+[ext_resource type="AudioStream" uid="uid://e1gdx6vyd2d" path="res://assets/sound/Hero_Hurt.wav" id="3_lh4fm"]
+[ext_resource type="Texture2D" uid="uid://bbvwnbdi7c73q" path="res://assets/art/player_idle1.png" id="3_ysyyu"]
+[ext_resource type="AudioStream" uid="uid://ctrvdk7xy30xe" path="res://assets/sound/Sword2.wav" id="4_1lxuw"]
+[ext_resource type="Texture2D" uid="uid://7g8omiygjov6" path="res://assets/art/player_idle2.png" id="4_585xo"]
+[ext_resource type="Texture2D" uid="uid://shmqt4muytce" path="res://assets/art/player_jump.png" id="5_6hboq"]
+[ext_resource type="Texture2D" uid="uid://jefgte85r5ef" path="res://assets/art/player_walk1.png" id="6_k4y2d"]
+[ext_resource type="Texture2D" uid="uid://6p070flkv03q" path="res://assets/art/player_walk2.png" id="7_4r16g"]
+[ext_resource type="Script" path="res://scripts/player_animation.gd" id="8_cni8a"]
+[ext_resource type="Texture2D" uid="uid://bdx6qdcgai31i" path="res://assets/art/player_walk3.png" id="8_whu83"]
+[ext_resource type="Texture2D" uid="uid://dvgpurvjnvtea" path="res://assets/art/player_arms.png" id="13_60wnm"]
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 4.0
+height = 15.0
+
+[sub_resource type="Animation" id="Animation_ofhi2"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_ysyyu"), ExtResource("4_585xo")]
+}
+
+[sub_resource type="Animation" id="Animation_jp12d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ysyyu")]
+}
+
+[sub_resource type="Animation" id="Animation_pjs8v"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_k4y2d"), ExtResource("7_4r16g"), ExtResource("8_whu83")]
+}
+
+[sub_resource type="Animation" id="Animation_7msof"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_6hboq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ihh4"]
+_data = {
+"RESET": SubResource("Animation_jp12d"),
+"idle": SubResource("Animation_ofhi2"),
+"jump": SubResource("Animation_7msof"),
+"walk": SubResource("Animation_pjs8v")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "arms_sprite", "equipment_node")]
+script = ExtResource("1_5wuh1")
+jump_platform = ExtResource("2_2rooy")
+animation_player = NodePath("AnimationPlayer")
+arms_sprite = NodePath("ArmsSprite2D")
+damage_sound = ExtResource("3_lh4fm")
+sword_sound = ExtResource("4_1lxuw")
+equipment_dir = "res://nodes/equipment"
+equipment_node = NodePath("Equipment")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_ysyyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("2")
+
+[node name="Equipment" type="Node2D" parent="."]
+
+[node name="ArmsSprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("13_60wnm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite")]
+libraries = {
+"": SubResource("AnimationLibrary_6ihh4")
+}
+script = ExtResource("8_cni8a")
+sprite = NodePath("../Sprite2D")

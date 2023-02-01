@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://g3xcqatx6xpq"
+path="res://.godot/imported/DOS-88 - Far away.ogg-e8a3d110c7067acdcdc3595f6522fcfe.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/dos-88/DOS-88 - Far away.ogg"
+dest_files=["res://.godot/imported/DOS-88 - Far away.ogg-e8a3d110c7067acdcdc3595f6522fcfe.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

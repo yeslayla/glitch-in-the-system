@@ -1,0 +1,197 @@
+[gd_scene load_steps=14 format=3 uid="uid://xkrdgb50o36j"]
+
+[ext_resource type="Theme" uid="uid://x4at2pluavto" path="res://general_theme.tres" id="1"]
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="2_o32of"]
+[ext_resource type="AudioStream" uid="uid://dyywryu8rhlhx" path="res://assets/music/dos-88/race_to_mars.ogg" id="3_otmaj"]
+[ext_resource type="PackedScene" uid="uid://lvot4p62fxa8" path="res://scenes/game.tscn" id="4_3155t"]
+[ext_resource type="Texture2D" uid="uid://d08p0mamsxnvh" path="res://assets/art/general_bkg.png" id="5_y6rms"]
+[ext_resource type="Texture2D" uid="uid://b5q202ja5gj34" path="res://assets/art/Grid/agrid1.png" id="6_xwd2a"]
+[ext_resource type="Texture2D" uid="uid://duebi3omvs87x" path="res://assets/art/Grid/agrid2.png" id="7_qnlu0"]
+[ext_resource type="Texture2D" uid="uid://dkudsaa5hejwp" path="res://assets/art/Grid/agrid3.png" id="8_whr7k"]
+[ext_resource type="Texture2D" uid="uid://d1tcq3mhsacsy" path="res://assets/art/Grid/agrid4.png" id="9_oss5l"]
+[ext_resource type="Texture2D" uid="uid://bgx16te786fit" path="res://assets/art/Grid/agrid5.png" id="10_32ivq"]
+[ext_resource type="Texture2D" uid="uid://dxkqp2gnkbodl" path="res://assets/art/logo.png" id="11_vtvqe"]
+
+[sub_resource type="AnimatedTexture" id="1"]
+frames = 5
+frame_0/texture = ExtResource("6_xwd2a")
+frame_1/texture = ExtResource("7_qnlu0")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("8_whr7k")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("9_oss5l")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("10_32ivq")
+frame_4/duration = 1.0
+
+[sub_resource type="GDScript" id="2"]
+script/source = "extends Control
+
+func _ready():
+	$BackButton.connect(\"button_down\",Callable(self,\"on_button_down\"))
+	
+func on_button_down():
+	hide()"
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2_o32of")
+music = ExtResource("3_otmaj")
+new_game_scene = ExtResource("4_3155t")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="Staticbkg" type="TextureRect" parent="."]
+modulate = Color(0.509804, 0.509804, 0.509804, 1)
+texture_filter = 1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("5_y6rms")
+expand_mode = 1
+
+[node name="Animatedbkg" type="TextureRect" parent="."]
+modulate = Color(0.423529, 0.423529, 0.423529, 1)
+texture_filter = 1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource("1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -31.0
+offset_bottom = 107.0
+color = Color(0, 0, 0, 1)
+
+[node name="New Game" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.6334
+offset_top = -28.0
+offset_right = 58.3666
+offset_bottom = 7.0
+text = "[Start Game]"
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.6334
+offset_top = 20.0
+offset_right = 58.3666
+offset_bottom = 55.0
+text = "[Credits]"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.6334
+offset_top = 68.0
+offset_right = 58.3666
+offset_bottom = 103.0
+text = "[Quit]"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_right = 80.0
+text = "develop"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.5
+offset_top = 16.0
+offset_right = 216.5
+offset_bottom = 227.0
+texture = ExtResource("11_vtvqe")
+expand_mode = 1
+
+[node name="CreditsMenu" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource("2")
+
+[node name="ColorRect" type="ColorRect" parent="CreditsMenu"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="CreditsMenu"]
+texture_filter = 1
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.5
+offset_top = 16.0
+offset_right = 216.5
+offset_bottom = 227.0
+texture = ExtResource("11_vtvqe")
+expand_mode = 1
+
+[node name="BackButton" type="Button" parent="CreditsMenu"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -56.0
+offset_right = -26.0
+offset_bottom = -21.0
+text = "[Back]"
+
+[node name="Label" type="Label" parent="CreditsMenu"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = -36.5
+offset_right = 254.0
+offset_bottom = 36.5
+text = "Designed and Programmed by Layla Manley
+
+Music  Provided by DOS-88
+
+Sound Provdided by danereid1024"
+
+[node name="Fader" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

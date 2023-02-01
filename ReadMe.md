@@ -1,8 +1,7 @@
 # Glitch In The System
-![GitHub repo size](https://img.shields.io/github/repo-size/josephbmanley/GlitchInTheSystem.svg)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fjosephbmanley%2FGlitchInTheSystem%2Fbadge%3Fref%3Ddevelop&style=flat)](https://actions-badge.atrox.dev/josephbmanley/GlitchInTheSystem/goto?ref=develop)
+![GitHub repo size](https://img.shields.io/github/repo-size/yeslayla/GlitchInTheSystem.svg)
 
-[Play on Itch.io](https://joebmanley.itch.io/glitchinthesystem)
+[Play on Itch.io](https://yeslayla.itch.io/glitchinthesystem)
 
 This project was created during [Godot Wild Jam #10](https://itch.io/jam/godot-wild-jam-10) as a means of learning the [Godot Engine](https://godotengine.org/).
 

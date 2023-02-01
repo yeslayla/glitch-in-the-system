@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bed416p2vtl8s"
+path="res://.godot/imported/DOS-88 - City Stomper.ogg-53f12327446f048880c09e6e94d7336c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/dos-88/DOS-88 - City Stomper.ogg"
+dest_files=["res://.godot/imported/DOS-88 - City Stomper.ogg-53f12327446f048880c09e6e94d7336c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

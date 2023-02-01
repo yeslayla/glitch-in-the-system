@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dq1isw2newp5k"
+path="res://.godot/imported/Crash Landing.ogg-16c0c8e5a4be6bef98c3f81f129e1ad9.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/dos-88/Crash Landing.ogg"
+dest_files=["res://.godot/imported/Crash Landing.ogg-16c0c8e5a4be6bef98c3f81f129e1ad9.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

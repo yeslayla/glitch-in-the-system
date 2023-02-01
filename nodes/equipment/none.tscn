@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2q155626ggba"]
+
+[ext_resource type="Texture2D" uid="uid://dvgpurvjnvtea" path="res://assets/art/player_arms.png" id="1_amahe"]
+
+[node name="Arms" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_amahe")

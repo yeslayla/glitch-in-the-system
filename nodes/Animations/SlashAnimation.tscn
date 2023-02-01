@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Texture2D" uid="uid://nc2p2vnqoqgw" path="res://assets/art/slash_effect2.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://d2i7ccfpc02oc" path="res://assets/art/slash_effect3.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://deo8pw0jpbiou" path="res://assets/art/slash_effect4.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://7ucol82h3vtr" path="res://assets/art/slash_effect5.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://nu06lwegyfpy" path="res://assets/art/slash_effect1.png" id="5"]
+[ext_resource type="Script" path="res://scripts/destroy_after_animation.gd" id="6"]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "destroy",
+"speed": 100.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "spawn",
+"speed": 5.0
+} ]
+
+[node name="SlashAnimation" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+frames = SubResource( 1 )
+animation = "destroy"
+frame = 2
+playing = true
+script = ExtResource( 6 )

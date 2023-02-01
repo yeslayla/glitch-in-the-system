@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Theme" uid="uid://cxgvk5h68qluc" path="res://general_theme.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://d04y8053bm382" path="res://assets/fonts/pixelmix/pixelmix.ttf" id="2"]
+[ext_resource type="Script" path="res://scripts/RunLabel.gd" id="3"]
+
+[sub_resource type="FontFile" id=1]
+size = 8
+font_data = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 14.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.6, 0.898039, 0.313726, 1 )
+text = "test"
+script = ExtResource( 3 )

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://ceaml5a56mbes" path="res://assets/art/basic_light.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://df3auvg5myvws" path="res://assets/art/light.png" id="2"]
+
+[node name="Light3D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource( 1 )
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2( 0, -2 )
+texture = ExtResource( 2 )
+texture_scale = 1.5

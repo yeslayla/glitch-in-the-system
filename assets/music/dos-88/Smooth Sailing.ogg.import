@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dipso7csfdxop"
+path="res://.godot/imported/Smooth Sailing.ogg-9ada5c7a8b3274c49d9c8fcb8afd791d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/dos-88/Smooth Sailing.ogg"
+dest_files=["res://.godot/imported/Smooth Sailing.ogg-9ada5c7a8b3274c49d9c8fcb8afd791d.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

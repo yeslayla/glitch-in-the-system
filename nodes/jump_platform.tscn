@@ -1,0 +1,31 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Texture2D" uid="uid://rig2dboor6s7" path="res://assets/art/jump_platform1.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://diphwlslm0iy1" path="res://assets/art/jump_platform2.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dwwvlvt4r5hed" path="res://assets/art/jump_platform3.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b3ttt5vljp022" path="res://assets/art/jump_platform4.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://d0e3kf30cvhyy" path="res://assets/art/jump_platform5.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://vcpivylpa36o" path="res://assets/art/jump_platform6.png" id="6"]
+[ext_resource type="Script" path="res://scripts/destroy_after_animation.gd" id="7"]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "spawn",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "destroy",
+"speed": 20.0
+} ]
+
+[node name="Platform" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+frames = SubResource( 1 )
+animation = "spawn"
+frame = 5
+playing = true
+script = ExtResource( 7 )

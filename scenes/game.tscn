@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://lvot4p62fxa8"]
+
+[ext_resource type="Script" path="res://scripts/map_generation.gd" id="1_w8dyh"]
+[ext_resource type="Theme" uid="uid://x4at2pluavto" path="res://general_theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://de3exlu8jniam" path="res://nodes/player.tscn" id="2_earhp"]
+[ext_resource type="PackedScene" path="res://nodes/light.tscn" id="3_bv6rn"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="4_3v8j0"]
+[ext_resource type="PackedScene" path="res://nodes/pickup.tscn" id="4_kkigm"]
+[ext_resource type="PackedScene" uid="uid://blr7x54kkvyf7" path="res://nodes/Enemies/basic_enemy.tscn" id="5_8nu0p"]
+[ext_resource type="PackedScene" path="res://nodes/exit.tscn" id="6_rjol2"]
+[ext_resource type="AudioStream" uid="uid://gnl0w5o4vuf5" path="res://assets/music/dos-88/checking_manifest.ogg" id="7_elffc"]
+[ext_resource type="TileSet" uid="uid://cluemfplimly4" path="res://assets/tiles.tres" id="9_m551d"]
+
+[sub_resource type="GDScript" id="1"]
+script/source = "extends Node
+
+var WAIT_TIME = 1
+var timer: Timer
+
+func _ready():
+	start_timer(WAIT_TIME)
+
+func start_timer(seconds):
+	timer = Timer.new()
+	add_child(timer)
+	timer.connect(\"timeout\",Callable(self,\"get_the_timeout\"))
+	timer.start(seconds)
+
+func get_the_timeout():
+	get_parent().defaultGenerator()
+	timer.queue_free()
+
+func hideSelf():
+	queue_free()
+"
+
+[node name="World3D" type="Node2D"]
+script = ExtResource("1_w8dyh")
+player_scene = ExtResource("2_earhp")
+light = ExtResource("3_bv6rn")
+pickup = ExtResource("4_kkigm")
+basic_enemy = ExtResource("5_8nu0p")
+exit = ExtResource("6_rjol2")
+music = ExtResource("7_elffc")
+
+[node name="LoadingScreen" type="CanvasLayer" parent="."]
+script = SubResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="LoadingScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="LoadingScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.226
+offset_top = -39.4122
+offset_right = 176.774
+offset_bottom = -23.4122
+theme = ExtResource("2")
+text = "Generating a new map..."
+
+[node name="GenerationProgress" type="Label" parent="LoadingScreen"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.604
+offset_top = -22.878
+offset_right = 307.604
+offset_bottom = -6.87799
+theme = ExtResource("2")
+
+[node name="tile_map" type="TileMap" parent="."]
+unique_name_in_owner = true
+tile_set = ExtResource("9_m551d")
+format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(10, 10)
+current = true
+script = ExtResource("4_3v8j0")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.713726, 0.713726, 0.713726, 1)

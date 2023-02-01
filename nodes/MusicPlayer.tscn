@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="AudioStream" uid="uid://dqm4rc76fpbkt" path="res://assets/music/dos-88/DOS-88 - Automatav2.ogg" id="1"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+bus = "Music"

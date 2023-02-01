@@ -1,0 +1,173 @@
+[gd_scene load_steps=12 format=3 uid="uid://djxjod3bnqdq6"]
+
+[ext_resource type="Script" path="res://scripts/equipment/saber.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://2qvbod1l4s0q" path="res://assets/art/equipment/katana/katana_equipment.png" id="2_xtivd"]
+[ext_resource type="AudioStream" uid="uid://3f8vhhml15h" path="res://assets/sound/Cancel2.wav" id="5_1dip1"]
+[ext_resource type="Texture2D" uid="uid://ceqv31vnvglcm" path="res://assets/art/trail.png" id="17_kab6p"]
+[ext_resource type="Script" path="res://nodes/equipment/Line2D.gd" id="18"]
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 32.0
+height = 96.0
+
+[sub_resource type="Animation" id="Animation_dbnl7"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_toqbl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_s6hcs"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_1dip1")
+}],
+"times": PackedFloat32Array(0.3)
+}
+
+[sub_resource type="Animation" id="Animation_qbfwu"]
+resource_name = "sheathed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77vfc"]
+_data = {
+"RESET": SubResource("Animation_toqbl"),
+"attack": SubResource("Animation_s6hcs"),
+"idle": SubResource("Animation_dbnl7"),
+"sheathed": SubResource("Animation_qbfwu")
+}
+
+[node name="Arms" type="Node2D" node_paths=PackedStringArray("animation_player", "area")]
+script = ExtResource("1")
+animation_player = NodePath("AnimationPlayer")
+area = NodePath("Sprite2D/Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_xtivd")
+hframes = 7
+metadata/_edit_group_ = true
+
+[node name="Line2D" type="Line2D" parent="Sprite2D"]
+visible = false
+z_index = -10
+z_as_relative = false
+points = PackedVector2Array(27.1471, 15.6522)
+default_color = Color(0.596078, 0.596078, 0.596078, 0.65098)
+texture = ExtResource("17_kab6p")
+texture_mode = 2
+script = ExtResource("18")
+targetPath = NodePath("..")
+trailLength = 8
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(24, -8)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+shape = SubResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_77vfc")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1dip1")
+volume_db = -16.0
+bus = &"Sound Effects"

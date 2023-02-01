@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7x8ttm1g41lc"]
+
+[ext_resource type="PackedScene" uid="uid://de3exlu8jniam" path="res://nodes/player.tscn" id="1"]
+[ext_resource type="TileSet" uid="uid://cluemfplimly4" path="res://assets/tiles.tres" id="2_l7xjr"]
+[ext_resource type="PackedScene" path="res://nodes/exit.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://blr7x54kkvyf7" path="res://nodes/Enemies/basic_enemy.tscn" id="4"]
+
+[sub_resource type="GDScript" id="1"]
+script/source = "extends Node2D
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Player/Camera2D.current = true
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="World3D" type="Node2D"]
+script = SubResource("1")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+
+[node name="tile_map" type="TileMap" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+tile_set = ExtResource("2_l7xjr")
+format = 2
+layer_0/tile_data = PackedInt32Array(1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048598, 0, 0, 1114135, 0, 0, 1114136, 0, 0, 1114137, 0, 0, 1114138, 0, 0, 1114139, 0, 0, 1114140, 0, 0, 1114141, 0, 0, 1114142, 0, 0, 1114143, 0, 0, 1114144, 0, 0, 1048608, 0, 0, 1048609, 0, 0, 983072, 0, 0, 983071, 0, 0, 983070, 0, 0, 983069, 0, 0, 983068, 0, 0, 983067, 0, 0, 983066, 0, 0, 983065, 0, 0, 917529, 0, 0, 917528, 0, 0, 917527, 0, 0, 917526, 0, 0, 917525, 0, 0, 917524, 0, 0, 917523, 0, 0, 917522, 0, 0, 917521, 0, 0, 917520, 0, 0, 983056, 0, 0, 983055, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 983063, 0, 0, 1048599, 0, 0, 1048600, 0, 0, 1048601, 0, 0, 1048602, 0, 0, 1048603, 0, 0, 1048604, 0, 0, 1048605, 0, 0, 1048606, 0, 0, 1048607, 0, 0, 983064, 0, 0, 1048573, 0, 0, 1114109, 0, 0, 1048574, 0, 0, 1114110, 0, 0, 1048575, 0, 0, 1114111, 0, 0, 983040, 0, 0, 1048576, 0, 0, 983041, 0, 0, 1048577, 0, 0, 983042, 0, 0, 1048578, 0, 0, 983043, 0, 0, 1048579, 0, 0, 983044, 0, 0, 1048580, 0, 0, 983045, 0, 0, 1048581, 0, 0, 983046, 0, 0, 1048582, 0, 0, 983047, 0, 0, 1048583, 0, 0, 983048, 0, 0, 1048584, 0, 0, 983049, 0, 0, 1048585, 0, 0, 983050, 0, 0, 1048586, 0, 0, 983051, 0, 0, 1048587, 0, 0, 983052, 0, 0, 1048588, 0, 0, 983053, 0, 0, 1048589, 0, 0, 983054, 0, 0, 1048590, 0, 0, 983037, 0, 0, 983038, 0, 0, 983039, 0, 0, 917504, 0, 0, 917505, 0, 0, 917506, 0, 0, 917507, 0, 0, 917508, 0, 0, 917509, 0, 0, 917510, 0, 0, 917511, 0, 0, 917512, 0, 0, 917513, 0, 0, 917514, 0, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 917518, 0, 0, 917519, 0, 0, 786441, 0, 0, 851977, 0, 0, 983073, 0, 0, 1114145, 0, 0, 983074, 0, 0, 1048610, 0, 0, 1114146, 0, 0, 983075, 0, 0, 1048611, 0, 0, 1114147, 0, 0, 720909, 1, 0, 786445, 1, 0, 851981, 1, 0)
+
+[node name="Exit" parent="." instance=ExtResource("3")]
+position = Vector2(519, 232)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.713726, 0.713726, 0.713726, 1)
+
+[node name="Basic Enemy" parent="." instance=ExtResource("4")]
+position = Vector2(388.203, 157.958)

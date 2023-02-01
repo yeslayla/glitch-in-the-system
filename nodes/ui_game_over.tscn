@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://campy0ltqj64h"]
+
+[ext_resource type="Theme" uid="uid://x4at2pluavto" path="res://general_theme.tres" id="1_ryqd1"]
+
+[sub_resource type="GDScript" id="8"]
+script/source = "extends Button
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"button_down\",Callable(self,\"on_button\"))
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+func on_button():
+	get_tree().change_scene_to_file(\"res://Nodes/Title.tscn\")
+"
+
+[node name="GameOver" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ryqd1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.5
+offset_top = -50.0
+offset_right = 227.5
+offset_bottom = 50.0
+text = "Unit Lost..."
+
+[node name="MainMenu" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -82.5
+offset_top = -80.0
+offset_right = 82.5
+offset_bottom = -40.0
+text = "Main Menu"
+script = SubResource("8")

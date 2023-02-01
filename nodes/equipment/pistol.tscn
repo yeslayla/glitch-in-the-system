@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx6o3cvmmpboe"]
+
+[ext_resource type="Script" path="res://scripts/equipment/pistol.gd" id="1_a74on"]
+[ext_resource type="PackedScene" uid="uid://ljnxxvv8n4ho" path="res://nodes/projectiles/pistol_bullet.tscn" id="2_suef3"]
+[ext_resource type="Texture2D" uid="uid://68bhqeovy8xl" path="res://assets/art/equipment/pistol/pistol.png" id="2_vtqpk"]
+
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("left_arm", "right_arm", "origin", "bullet_spawning_point", "pistol_handle", "sprite", "sheath_point")]
+rotation = 0.00217739
+script = ExtResource("1_a74on")
+bullet = ExtResource("2_suef3")
+left_arm = NodePath("LeftArmLine2D")
+right_arm = NodePath("RightArmLine2D")
+origin = NodePath("Origin")
+bullet_spawning_point = NodePath("Origin/Handle/BulletSpawner")
+pistol_handle = NodePath("Origin/Handle")
+sprite = NodePath("Origin/Handle/Sprite2D")
+sheath_point = NodePath("SheathPos")
+auto_z_index = false
+
+[node name="Origin" type="Node2D" parent="."]
+
+[node name="Handle" type="Node2D" parent="Origin"]
+position = Vector2(3.99999, -0.00870954)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Origin/Handle"]
+texture_filter = 1
+position = Vector2(0.5, -0.5)
+texture = ExtResource("2_vtqpk")
+
+[node name="BulletSpawner" type="Node2D" parent="Origin/Handle"]
+position = Vector2(3, -1)
+
+[node name="LeftArmLine2D" type="Line2D" parent="."]
+points = PackedVector2Array(-2.5, 0, 3.5, 1)
+width = 1.0
+default_color = Color(0.6, 0.898039, 0.313726, 1)
+
+[node name="RightArmLine2D" type="Line2D" parent="."]
+points = PackedVector2Array(2.5, 0, 3.5, 1)
+width = 1.0
+default_color = Color(0.6, 0.898039, 0.313726, 1)
+
+[node name="SheathPos" type="Node2D" parent="."]
+position = Vector2(-6, 3)
+rotation = 1.5708

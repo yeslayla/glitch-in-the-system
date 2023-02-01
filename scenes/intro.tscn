@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgdfqoiw4n45u"]
+
+[ext_resource type="Script" path="res://scripts/manage_intro.gd" id="1_qo7l0"]
+[ext_resource type="PackedScene" uid="uid://xkrdgb50o36j" path="res://scenes/title_screen.tscn" id="2_1k5vh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 2030.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "gis init
+Gathering resources...
+Gathered: Humanskeleton.yaml
+Gathered: Joints.yaml
+Gathered: Ligaments.yaml
+Gathered: Muscularsystem.yaml
+Gathered: Tendons.yaml
+Gathered: Digestivesystem.yaml
+Gathered: Mouth.yaml
+Gathered: Teeth.yaml
+Gathered: Tongue.yaml
+Gathered: Pharynx.yaml
+Gathered Nervoussystem.yaml
+Supressing: Frontallobe.yaml
+Gathered: Esophagus.yaml
+Gathered: Stomach.yaml
+Gathered: Smallintestine.yaml
+Gathered: Liver.yaml
+Gathered: Gallbladder.yaml
+Gathered: Pancreas.yaml
+
+Intializing..."
+script = ExtResource("1_qo7l0")
+title_screen = ExtResource("2_1k5vh")
